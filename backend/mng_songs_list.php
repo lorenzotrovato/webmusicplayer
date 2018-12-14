@@ -15,18 +15,18 @@
     //check deleted songs
     $q = $mysqli->query('SELECT * FROM songs');
     while($s = $q->fetch_assoc()){
-        if(!is_file(WKDIR .'/'.basename($s['file_name']))){ 
+        if(!file_exists(WKDIR .DIRECTORY_SEPARATOR.basename($s['file_name']))){ 
             $mysqli->query('DELETE FROM songs WHERE file_name="'.$s['file_name'].'"');
         }
     }
     //check for new songs
     foreach($wkdircont as $file){
-        if(is_file($file) && !is_dir($file)){
-            $file = str_replace(WKDIR . '/','',$file);
-            if(in_array(mime_content_type(WKDIR .'/'.$file),ALLOWED_FILE_TYPES)){
-                $fp = hash_file('sha256',WKDIR .'/'.$file);
+        if(file_exists($file) && !is_dir($file)){
+            $file = str_replace(WKDIR . DIRECTORY_SEPARATOR,'',$file);
+            if(in_array(mime_content_type(WKDIR .DIRECTORY_SEPARATOR.$file),ALLOWED_FILE_TYPES)){
+                $fp = hash_file('sha256',WKDIR .DIRECTORY_SEPARATOR.$file);
                 if(!songAlreadyExists($fp)){
-                    $songdata = getSongDataParsed(WKDIR .'/'.$file);
+                    $songdata = getSongDataParsed(WKDIR .DIRECTORY_SEPARATOR.$file);
                     $qrIns = 'INSERT INTO songs(title, artist, album, duration, file_hash, file_name) VALUES (
                     "'.$mysqli->real_escape_string($songdata['title']).'",
                     "'.$mysqli->real_escape_string($songdata['artist']).'",

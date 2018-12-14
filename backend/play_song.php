@@ -26,7 +26,6 @@
 
     function stream($file, $content_type = 'application/octet-stream') {
         @error_reporting(0);
-        // Make sure the files exists, otherwise we are wasting our time
         if (!file_exists($file)) {
             header("HTTP/1.1 404 Not Found");
             exit;

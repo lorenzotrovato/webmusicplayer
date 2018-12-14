@@ -3,7 +3,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-    $iniparsed = parse_ini_file(dirname(__DIR__,2).'/wmp.ini',true);
+    $iniparsed = parse_ini_file(join(dirname(__DIR__,2),DIRECTORY_SEPARATOR,'wmp.ini'),true);
 
     //working directory
     define('WKDIR',$iniparsed['dir_path']);
