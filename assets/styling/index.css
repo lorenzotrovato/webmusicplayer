@@ -1,0 +1,148 @@
+footer#playerIface{
+    border-top: 1px solid white;
+    position: fixed;
+    bottom: 0;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    background: #222324;
+    border-radius: 7px;
+}
+
+.center-text{
+    text-align: center;
+}
+
+.icon-container i{
+    font-size: 22pt !important;
+    border-radius: 50%;
+}
+
+.icon-btn i{
+    font-size: 25pt !important;
+    border: 2px solid white;
+    border-radius: 50%;
+    padding: 7px;
+}
+
+.icon-container .icon-btn{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.icon-container i:hover{
+    background: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+}
+
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#pgbar-audio .noUi-connect{
+    background: #2980b9;
+}
+
+#pgbar-audio{
+    height: 7px;
+    margin-top: 1vh;
+}
+
+#pgbar-audio .noUi-handle{
+    background: white;
+    border-radius: 50%;
+    cursor: pointer;
+    height: 18px;
+    width: 18px;
+}
+
+#pgbar-audio .noUi-handle:before,#pgbar-audio .noUi-handle:after{
+    display: none;
+}
+
+#pgbar-audio_container{
+    display: inline-block;
+    width: 50%;
+}
+
+/*TABLE SONGSLIST*/
+
+.btn-col{
+    width: 8%;
+}
+
+.tablePlayBtn i{
+    font-size: 26px;
+}
+
+.tableQueueBtn i{
+    font-size: 20px;
+}
+
+.tablePlayBtn i:hover, .tableQueueBtn i:hover{
+    color: #68a4cc;
+    cursor: pointer;
+}
+
+#coverContainer{
+    position: fixed;
+    bottom: 10px;
+}
+
+#coverContainer img{
+    height: 9vh;
+    border-radius: 5px;
+    border: 2px solid black;
+}
+
+#playerSongInfoLabelDx{
+    position: fixed;
+    right: 10px;
+    bottom: 5px;
+}
+
+.text-sec-content{
+    color: #bac0c5;
+}
+
+.text-title-player{
+    font-size: 13pt;
+}
+
+.navbar-fixed-top{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+}
+
+.table-wrapper-scroll-y {
+    display: block;
+    overflow-y: auto;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+
+/*EFFECT VIEWER STYLE*/
+#effectsSc{
+	background: black;
+    font-family: 'Roboto', sans-serif;
+    background: black;
+    height: 95vh;
+    position: absolute;
+    z-index: -10;
+    width: 100%;
+}
+
+.canvasContainer{
+    text-align: center;
+}
+
+.dropdown-toggle::after{
+    vertical-align: text-top !important; 
+}
+

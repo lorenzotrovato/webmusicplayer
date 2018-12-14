@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link rel="stylesheet" href="assets/styling/bootstrap.min.css">
+		<link rel="stylesheet" href="assets/styling/MaterialIcons.css">
+		<link rel="stylesheet" href="assets/styling/nouislider.min.css" type="text/css">
+		<link rel="stylesheet" href="assets/styling/index.css" type="text/css">
+
+		<title>Web Music Player</title>
+	</head>
+	<body class="bg-dark text-white noselect">
+		<nav class="navbar navbar-expand-lg navbar-dark table-dark navbar-fixed-top">
+			<a class="navbar-brand" href="#" onclick="location.reload();" id="navbarTitleLbl">Web Music Player - Songs</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+			</button>
+			
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item">
+						<a class="nav-link" href="#" id="navbarRefreshBtn"><i class="material-icons">refresh</i>&nbsp;<span style="vertical-align: top;">Refresh songs list</span></a>
+					</li>
+					<li class="nav-item">
+							<a class="nav-link" href="#" id="navbarOpenQueueBtn" data-openqueue="false"><i class="material-icons">queue_music</i>&nbsp;<span style="vertical-align: top;">Open Queue</span></a>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<i class="material-icons">fullscreen</i>&nbsp;<span style="vertical-align: top;">Visual effects</span>
+						</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown" id="navbarDropdownEffects">
+							<a class="dropdown-item" href="#" data-effectid="0">Bars</a>
+							<a class="dropdown-item" href="#" data-effectid="1">Wave</a>
+							<a class="dropdown-item" href="#" data-effectid="2">Radial</a>
+							<a class="dropdown-item" href="#" data-effectid="3">Bars + Wave</a>
+							<div class="dropdown-divider"></div>
+							<span class="dropdown-item">
+								<div class="form-check">
+									<input class="form-check-input" type="checkbox" value="" id="navbarDropdownFullscreenCheck">
+									<label class="form-check-label" for="navbarDropdownFullscreenCheck">
+										Hide controls
+									</label>
+								</div>
+							</span>
+						</div>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#" id="navbarCloseEffectsBtn" style="display: none;"><i class="material-icons">fullscreen_exit</i>&nbsp;<span style="vertical-align: top;">Close effects</span></a>
+					</li>
+					<li class="nav-item">
+						<span class="nav-link disabled" id="navbarNSongsLbl">Songs: 00 - total time: 0 hours, 0 minutes</span>
+					</li>
+					<li class="nav-item">
+						<span class="nav-link disabled" id="navbarQueueNLbl">Queue: 0 songs</span>
+					</li>
+				</ul>
+				<form class="form-inline my-2 my-lg-0">
+					<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="navbarSearchTxt">
+					<button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="navbarSearchBtn"><i class="material-icons">search</i></button>
+				</form>
+			</div>
+		</nav>
+		<section id="songsList">
+			<div class="table-wrapper-scroll-y">
+				<table class="table table-hover table-striped table-dark bg-dark" id="table_songlist">
+					<thead style="background: black;">
+						<tr><th class="btn-col"></th><th scope="col">Title</th><th scope="col">Artist</th><th scope="col">Album</th><th scope="col">Duration</th></tr>
+					</thead>
+					<tbody id="tbody_songlist">
+						<tr data-songid="0">
+							<td class="btn-col">
+							</td>
+							<td>Loading</td><td></td><td></td><td></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</section>
+
+		<section id="effectsSc" style="display: none; background: black; height: 90vh;">
+			<section id="displayEffects">
+				<div class="canvasContainer">
+					<canvas class="visualizer" id="cnvs1" width="1000" height="500" style="display: none;"></canvas>
+				</div>
+				<div class="canvasContainer">
+					<canvas class="visualizer" id="cnvs2" width="1600" height="750" style="display: none;"></canvas>
+				</div>
+			</section>
+        </section>
+
+		<footer class="container-fluid center-text" id="playerIface">
+			<audio id="audioObj" style="display: none">
+				<source src="" type="audio/mp3">
+			</audio>
+			<div id="coverContainer" class="d-none d-lg-block">
+				<img src="assets/images/sample.jpeg" height="150">
+			</div>
+			<div id="playerSongInfoLabelSup" class="d-lg-none">
+				<span class="text-title-player"></span>
+				<span class="text-sec-content">In pausa</span>	
+			</div>
+			<div class="icon-container">
+				<i class="material-icons" id="playerBtn_shuffle">shuffle</i>
+				<i class="material-icons d-none d-md-inline" id="playerBtn_replay10">replay_10</i>
+				<span class="icon-btn" id="playerBtn_skipp"><i class="material-icons">skip_previous</i></span>
+				<span class="icon-btn" id="playerBtn_playpause"><i class="material-icons">play_arrow</i></span>
+				<span class="icon-btn" id="playerBtn_skipn"><i class="material-icons">skip_next</i></span>
+				<i class="material-icons d-none d-md-inline" id="playerBtn_forward10">forward_10</i>
+				<i class="material-icons" id="playerBtn_repeat">repeat</i>
+			</div>
+			<span id="playerLabel_currentTime">00:00</span>
+			<div class="container" id="pgbar-audio_container">
+				<div id="pgbar-audio"></div>
+			</div>
+			<span id="playerLabel_duration">00:00</span>
+
+			<div id="playerSongInfoLabelDx" class="d-none d-lg-block">
+				<p>
+					<span class="text-title-player">In pausa</span><br>
+					<span class="text-sec-content">
+						<br>
+					</span>					
+				</p>
+			</div>
+		</footer>
+
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/popper.min.js"></script>
+		<script src="assets/js/bootstrap.min.js"></script>
+		<script src="assets/js/nouislider.min.js"></script>
+		<script src="assets/js/player.js"></script>
+		<script src="assets/js/list.js"></script>
+		<script src="assets/js/settings.js"></script>
+		<script src="assets/js/effects.js"></script>
+		<script>
+
+			$(document).ready(function(){
+				tableSongListHeight();
+                requestSongList();
+			});
+
+			$(window).on('resize',tableSongListHeight);
+
+			function tableSongListHeight(){
+				var navh = $('nav.navbar-fixed-top').height();
+				var playerh = $('#playerIface').height();
+				$('#songsList').css('margin-top',(navh+15) + 'px');
+				$('.table-wrapper-scroll-y').css('max-height',(window.innerHeight - (navh+playerh+50)) + 'px');
+			}
+		</script>
+	</body>
+</html>
